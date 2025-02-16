@@ -12,6 +12,9 @@ namespace Tiny_Top_Adventure
 {
     public partial class Form1 : Form
     {
+
+        int charWidth = 30;
+        int charHeight = 40;
         static Image F1 = Tiny_Top_Adventure.Properties.Resources.walkF1;
         static Image F2 = Tiny_Top_Adventure.Properties.Resources.walkF2;
         static Image B1 = Tiny_Top_Adventure.Properties.Resources.walkB1;
@@ -22,7 +25,7 @@ namespace Tiny_Top_Adventure
         static Image R2 = Tiny_Top_Adventure.Properties.Resources.walkR2;
         Image man = F1; 
         static int y = 20;
-        static int x = 20;
+        static int x = 20;  
         public Form1()
         {
             InitializeComponent();
@@ -36,12 +39,13 @@ namespace Tiny_Top_Adventure
 
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(man, x, y, 30, 40);
+            e.Graphics.DrawImage(man, x, y, charWidth, charHeight );// charWidth and charHeight  are the charcter size
         }
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.A)//if A is pressed
+            
+        private void Form1_KeyDown(object sender, KeyEventArgs e)//movement of the character
+        { 
+            int step = 10;// movement speed
+            if (e.KeyCode == Keys.A && x - step >= 0)//if A is pressed
             {
                 if (man == L1)
                 { man = L2;}
@@ -50,7 +54,7 @@ namespace Tiny_Top_Adventure
                 x = x - 10;//moves left
             }
 
-            if (e.KeyCode == Keys.D)//if D is pressed
+            if (e.KeyCode == Keys.D && x + step + charWidth <= Main.Width)//if D is pressed
             {
                 if (man == R1)
                 { man = R2; }
@@ -58,7 +62,7 @@ namespace Tiny_Top_Adventure
                 { man = R1; }
                 x = x + 10;//moves right
             }
-            if (e.KeyCode == Keys.S)//if W is pressed
+            if (e.KeyCode == Keys.S && y + step + charHeight  <= Main.Height)//if W is pressed
             {
                 if (man == F1)
                 { man = F2; }
@@ -66,7 +70,7 @@ namespace Tiny_Top_Adventure
                 { man = F1; }
                 y = y + 10;//moves UP
             }
-            if (e.KeyCode == Keys.W)//if D is pressed
+            if (e.KeyCode == Keys.W && y - step >= 0)//if D is pressed
             {
                 if (man == B1)
                 { man = B2; }

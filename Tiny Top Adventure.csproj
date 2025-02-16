@@ -107,5 +107,11 @@
   <ItemGroup>
     <None Include="Resources\walkB2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2025-02-16 224935.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2025-02-16_224935-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
