@@ -36,23 +36,21 @@
             // 
             this.Main.BackgroundImage = global::Tiny_Top_Adventure.Properties.Resources.background;
             this.Main.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Main.Location = new System.Drawing.Point(474, 18);
-            this.Main.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Main.Location = new System.Drawing.Point(316, 12);
             this.Main.Name = "Main";
-            this.Main.Size = new System.Drawing.Size(1356, 979);
+            this.Main.Size = new System.Drawing.Size(905, 637);
             this.Main.TabIndex = 0;
             this.Main.TabStop = false;
             this.Main.Paint += new System.Windows.Forms.PaintEventHandler(this.Main_Paint);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(1896, 1048);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.Main);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

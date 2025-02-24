@@ -73,6 +73,16 @@ namespace Tiny_Top_Adventure.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Fence {
+            get {
+                object obj = ResourceManager.GetObject("Fence", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap smoke {
             get {
                 object obj = ResourceManager.GetObject("smoke", resourceCulture);
