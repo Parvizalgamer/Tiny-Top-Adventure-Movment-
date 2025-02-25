@@ -116,5 +116,26 @@
   <ItemGroup>
     <None Include="Resources\Fence.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Coin 7.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

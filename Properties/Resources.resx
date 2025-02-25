@@ -121,6 +121,27 @@
   <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Coin_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Coin_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Coin 7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Fence" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fence.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
