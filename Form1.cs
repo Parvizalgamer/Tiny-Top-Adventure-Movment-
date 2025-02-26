@@ -79,8 +79,8 @@ namespace Tiny_Top_Adventure
         static Image coinFront = Tiny_Top_Adventure.Properties.Resources.Coin_4;
         List<obstacle> coinList = new List<obstacle>();
         int coins;
-        int charWidth = 30;
-        int charHeight = 40;
+        int charWidth = 50;
+        int charHeight = 60;
         static Image F1 = Tiny_Top_Adventure.Properties.Resources.walkF1;
         static Image F2 = Tiny_Top_Adventure.Properties.Resources.walkF2;
         static Image B1 = Tiny_Top_Adventure.Properties.Resources.walkB1;
@@ -123,6 +123,7 @@ namespace Tiny_Top_Adventure
         private void Form1_Load(object sender, EventArgs e)
         {
             rightMoveTimer.Enabled = true;
+            rightMoveTimer.Interval = 1000 / 60;
             obstacles[0] = new obstacle
             {
                 imageName = fence,
@@ -181,7 +182,7 @@ namespace Tiny_Top_Adventure
 
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(man, x, y, charWidth, charHeight);// charWidth and charHeight  are the charcter size
+            //e.Graphics.DrawImage(man, x, y, charWidth, charHeight);// charWidth and charHeight  are the charcter size
             for (int i = 0; i < 3; i++)
             {
                 e.Graphics.DrawImage(obstacles[i].imageName, obstacles[i].xLoc, obstacles[i].yLoc, obstacles[i].width, obstacles[i].height);

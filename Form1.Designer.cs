@@ -87,6 +87,7 @@
             // 
             // rightMoveTimer
             // 
+            this.rightMoveTimer.Interval = 25;
             this.rightMoveTimer.Tick += new System.EventHandler(this.rightMoveTimer_Tick);
             // 
             // Form1
