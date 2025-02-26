@@ -123,7 +123,7 @@ namespace Tiny_Top_Adventure
         private void Form1_Load(object sender, EventArgs e)
         {
             rightMoveTimer.Enabled = true;
-            rightMoveTimer.Interval = 1000 / 60;
+            rightMoveTimer.Interval = 1000 / 60;// fix aniamtion
             obstacles[0] = new obstacle
             {
                 imageName = fence,
