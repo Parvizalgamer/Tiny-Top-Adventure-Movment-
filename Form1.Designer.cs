@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Main = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Cointxt = new System.Windows.Forms.Label();
             this.Coins_label = new System.Windows.Forms.Label();
+            this.coinTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +78,11 @@
             this.Coins_label.Size = new System.Drawing.Size(74, 33);
             this.Coins_label.TabIndex = 3;
             // 
+            // coinTimer
+            // 
+            this.coinTimer.Enabled = true;
+            this.coinTimer.Tick += new System.EventHandler(this.coinTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,6 +111,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label Cointxt;
         private System.Windows.Forms.Label Coins_label;
+        private System.Windows.Forms.Timer coinTimer;
     }
 }
 

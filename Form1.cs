@@ -38,7 +38,27 @@ namespace Tiny_Top_Adventure
         static Image R1 = Tiny_Top_Adventure.Properties.Resources.walkR1;
         static Image R2 = Tiny_Top_Adventure.Properties.Resources.walkR2;
         static Image fence = Tiny_Top_Adventure.Properties.Resources.Fence;
-        
+
+        static Image[] coinImages = new Image[]
+        {
+            Tiny_Top_Adventure.Properties.Resources.Coin_1,
+            Tiny_Top_Adventure.Properties.Resources.Coin_2,
+            Tiny_Top_Adventure.Properties.Resources.Coin_3,
+            Tiny_Top_Adventure.Properties.Resources.Coin_4,
+            Tiny_Top_Adventure.Properties.Resources.Coin_5,
+            Tiny_Top_Adventure.Properties.Resources.Coin_6,
+            Tiny_Top_Adventure.Properties.Resources.Coin_7,
+            Tiny_Top_Adventure.Properties.Resources.Coin_8,
+            Tiny_Top_Adventure.Properties.Resources.Coin_9,
+            Tiny_Top_Adventure.Properties.Resources.Coin_10,
+            Tiny_Top_Adventure.Properties.Resources.Coin_11,
+            Tiny_Top_Adventure.Properties.Resources.Coin_12,
+            Tiny_Top_Adventure.Properties.Resources.Coin_13,
+        };
+        int coinFrame = 0; // Keeps track of the current coin image
+
+
+
         Image man = F1; 
         static int y = 20;
         static int x = 20;  
@@ -82,21 +102,28 @@ namespace Tiny_Top_Adventure
 
             coins = 0;
             int coinx = 400;
+            float scaleFactor = 0.2f; // Same scale factor as in Main_Paint
+
             for (int i = 0; i < 10; i++)
             {
+                Image coinImage = coinImages[0]; // Use any coin image to get dimensions
+                int originalWidth = coinImage.Width;
+                int originalHeight = coinImage.Height;
+
+                int scaledWidth = (int)(originalWidth * scaleFactor);
+                int scaledHeight = (int)(originalHeight * scaleFactor);
+
                 coinList.Add(new obstacle()
                 {
                     imageName = coinFront,
                     xLoc = coinx,
                     yLoc = 400,
-                    width = 20,
-                    height = 20,
-                    bounds = new Rectangle(coinx, 400, 20, 20)
+                    width = scaledWidth, // Use scaled width for hitbox
+                    height = scaledHeight, // Use scaled height for hitbox
+                    bounds = new Rectangle(coinx - scaledWidth / 2, 400 - scaledHeight / 2, scaledWidth, scaledHeight) // Center the hitbox
                 });
                 coinx = coinx + 40;
             }
-
-
         }
 
         private void Main_Paint(object sender, PaintEventArgs e)
@@ -106,14 +133,29 @@ namespace Tiny_Top_Adventure
             {
                 e.Graphics.DrawImage(obstacles[i].imageName, obstacles[i].xLoc, obstacles[i].yLoc, obstacles[i].width, obstacles[i].height);
             }
-            if (coinList.Count > 0)//check if the coin list is empty 
+            if (coinList.Count > 0)
             {
-                for (int i = 0; i < coinList.Count; i++)
-                {
+                float scaleFactor = 0.35f; // Adjust this value to your desired size (e.g., 0.5 for half size)
 
-                    e.Graphics.DrawImage(coinList[i].imageName, coinList[i].xLoc, coinList[i].yLoc, coinList[i].width, coinList[i].height);
+                foreach (var coin in coinList)
+                {
+                    Image currentCoinImage = coinImages[coinFrame];
+                    int originalWidth = currentCoinImage.Width;
+                    int originalHeight = currentCoinImage.Height;
+
+                    // Calculate scaled dimensions
+                    int scaledWidth = (int)(originalWidth * scaleFactor);
+                    int scaledHeight = (int)(originalHeight * scaleFactor);
+
+                    // Draw the coin centered using scaled dimensions
+                    e.Graphics.DrawImage(currentCoinImage,
+                        coin.xLoc - scaledWidth / 2,
+                        coin.yLoc - scaledHeight / 2,
+                        scaledWidth,
+                        scaledHeight);
                 }
             }
+
 
         }
 
@@ -172,26 +214,35 @@ namespace Tiny_Top_Adventure
             }
                 return collision;            
         }
-        private Boolean checkCoins() //did we hit a coin?
+       private Boolean checkCoins()
         {
-
             RectangleF manBound = new RectangleF(x, y, 30, 40);
-            if (coinList.Count > 0)//check if the list is empty 
+            for (int i = 0; i < coinList.Count; i++)
             {
-                for (int i = 0; i < coinList.Count; i++)
-                //iterate through the coins list
+                if (manBound.IntersectsWith(coinList[i].bounds))
                 {
-                    if (manBound.IntersectsWith(coinList[i].bounds))
-                    {
-                        coinList.RemoveAt(i);
-                        coins++;
-                        Coins_label.Text = coins.ToString();//change this label number
-
-                    }
+                    coinList.RemoveAt(i);
+                    coins++;
+                    Coins_label.Text = coins.ToString();
                 }
             }
             return true;
         }
+        bool coinReverse = false; // Flag to track animation direction
+        private void coinTimer_Tick(object sender, EventArgs e)
+        {
+            if (!coinReverse)
+            {
+                coinFrame++; 
+                if (coinFrame >= coinImages.Length - 1) coinReverse = true;
+            }
+            else
+            {
+                coinFrame--; 
+                if (coinFrame <= 0) coinReverse = false;
+            }
 
+            Main.Invalidate(); // Redraw the game screen
+        }
     }
 }

@@ -83,6 +83,46 @@ namespace Tiny_Top_Adventure.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Coin_10 {
+            get {
+                object obj = ResourceManager.GetObject("Coin_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Coin_11 {
+            get {
+                object obj = ResourceManager.GetObject("Coin_11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Coin_12 {
+            get {
+                object obj = ResourceManager.GetObject("Coin_12", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Coin_13 {
+            get {
+                object obj = ResourceManager.GetObject("Coin 13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Coin_2 {
             get {
                 object obj = ResourceManager.GetObject("Coin_2", resourceCulture);
@@ -136,6 +176,26 @@ namespace Tiny_Top_Adventure.Properties {
         internal static System.Drawing.Bitmap Coin_7 {
             get {
                 object obj = ResourceManager.GetObject("Coin_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Coin_8 {
+            get {
+                object obj = ResourceManager.GetObject("Coin_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Coin_9 {
+            get {
+                object obj = ResourceManager.GetObject("Coin_9", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
