@@ -1,18 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tiny_Top_Adventure
 {
     public partial class Form1 : Form
     {
+
+        static Image[] SonicR = new Image[]
+        {
+            Tiny_Top_Adventure.Properties.Resources.R1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.R2,
+            Tiny_Top_Adventure.Properties.Resources.R3,
+            Tiny_Top_Adventure.Properties.Resources.R4,
+            Tiny_Top_Adventure.Properties.Resources.R5,
+            Tiny_Top_Adventure.Properties.Resources.R6,
+            Tiny_Top_Adventure.Properties.Resources.R7,
+            Tiny_Top_Adventure.Properties.Resources.R8,
+            Tiny_Top_Adventure.Properties.Resources.R9,
+            Tiny_Top_Adventure.Properties.Resources.R10
+        };
+        static Image[] SonicL = new Image[]
+        {
+            Tiny_Top_Adventure.Properties.Resources.L1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.L2,
+            Tiny_Top_Adventure.Properties.Resources.L3,
+            Tiny_Top_Adventure.Properties.Resources.L4,
+            Tiny_Top_Adventure.Properties.Resources.L5,
+            Tiny_Top_Adventure.Properties.Resources.L6,
+            Tiny_Top_Adventure.Properties.Resources.L7,
+            Tiny_Top_Adventure.Properties.Resources.L8,
+            Tiny_Top_Adventure.Properties.Resources.L9,
+            Tiny_Top_Adventure.Properties.Resources.L10
+        };
+        static Image[] SonicU = new Image[]
+        {
+            Tiny_Top_Adventure.Properties.Resources.B1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.B2,
+            Tiny_Top_Adventure.Properties.Resources.B3,
+            Tiny_Top_Adventure.Properties.Resources.B4,
+            Tiny_Top_Adventure.Properties.Resources.B5,
+            Tiny_Top_Adventure.Properties.Resources.B6,
+            Tiny_Top_Adventure.Properties.Resources.B7,
+            Tiny_Top_Adventure.Properties.Resources.B8,
+            Tiny_Top_Adventure.Properties.Resources.B9, 
+        };
+        static Image[] SonicD = new Image[]
+        {
+            Tiny_Top_Adventure.Properties.Resources.F1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.F2,
+            Tiny_Top_Adventure.Properties.Resources.F3,
+            Tiny_Top_Adventure.Properties.Resources.F4,
+            Tiny_Top_Adventure.Properties.Resources.F5,
+            Tiny_Top_Adventure.Properties.Resources.F6,
+        };
+        int rightMoveFrame = 0;
+        bool isMovingRight = false;
+        int leftMoveFrame = 0;
+        bool isMovingLeft = false;
+
+        int upMoveFrame = 0;
+        bool isMovingUp = false;
+
+        int downMoveFrame = 0;
+        bool isMovingDown = false;
         struct obstacle//Structure of Obstacle
         {
             public Image imageName;
@@ -35,8 +87,8 @@ namespace Tiny_Top_Adventure
         static Image B2 = Tiny_Top_Adventure.Properties.Resources.walkB2;
         static Image L1 = Tiny_Top_Adventure.Properties.Resources.walkL1;
         static Image L2 = Tiny_Top_Adventure.Properties.Resources.walkL2;
-        static Image R1 = Tiny_Top_Adventure.Properties.Resources.walkR1;
-        static Image R2 = Tiny_Top_Adventure.Properties.Resources.walkR2;
+        //static Image R1 = Tiny_Top_Adventure.Properties.Resources.walkR1;
+        //static Image R2 = Tiny_Top_Adventure.Properties.Resources.walkR2;
         static Image fence = Tiny_Top_Adventure.Properties.Resources.Fence;
 
         static Image[] coinImages = new Image[]
@@ -59,9 +111,9 @@ namespace Tiny_Top_Adventure
 
 
 
-        Image man = F1; 
+        Image man = F1;
         static int y = 20;
-        static int x = 20;  
+        static int x = 20;
 
         public Form1()
         {
@@ -70,6 +122,7 @@ namespace Tiny_Top_Adventure
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            rightMoveTimer.Enabled = true;
             obstacles[0] = new obstacle
             {
                 imageName = fence,
@@ -128,7 +181,7 @@ namespace Tiny_Top_Adventure
 
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(man, x, y, charWidth, charHeight );// charWidth and charHeight  are the charcter size
+            e.Graphics.DrawImage(man, x, y, charWidth, charHeight);// charWidth and charHeight  are the charcter size
             for (int i = 0; i < 3; i++)
             {
                 e.Graphics.DrawImage(obstacles[i].imageName, obstacles[i].xLoc, obstacles[i].yLoc, obstacles[i].width, obstacles[i].height);
@@ -156,6 +209,48 @@ namespace Tiny_Top_Adventure
                 }
             }
 
+            if (isMovingRight)
+            {
+                e.Graphics.DrawImage(SonicR[rightMoveFrame], x, y, charWidth, charHeight);
+            }
+            else if (isMovingLeft)
+            {
+                e.Graphics.DrawImage(SonicL[leftMoveFrame], x, y, charWidth, charHeight);
+            }
+            else if (isMovingUp)
+            {
+                e.Graphics.DrawImage(SonicU[upMoveFrame], x, y, charWidth, charHeight);
+            }
+            else if (isMovingDown)
+            {
+                e.Graphics.DrawImage(SonicD[downMoveFrame], x, y, charWidth, charHeight);
+            }
+            else
+            {
+                e.Graphics.DrawImage(man, x, y, charWidth, charHeight); // Draw the standing sprite
+            }
+            if (coinList.Count > 0)
+            {
+                float scaleFactor = 0.35f; // Adjust this value to your desired size (e.g., 0.5 for half size)
+
+                foreach (var coin in coinList)
+                {
+                    Image currentCoinImage = coinImages[coinFrame];
+                    int originalWidth = currentCoinImage.Width;
+                    int originalHeight = currentCoinImage.Height;
+
+                    // Calculate scaled dimensions
+                    int scaledWidth = (int)(originalWidth * scaleFactor);
+                    int scaledHeight = (int)(originalHeight * scaleFactor);
+
+                    // Draw the coin centered using scaled dimensions
+                    e.Graphics.DrawImage(currentCoinImage,
+                        coin.xLoc - scaledWidth / 2,
+                        coin.yLoc - scaledHeight / 2,
+                        scaledWidth,
+                        scaledHeight);
+                }
+            }
 
         }
 
@@ -166,26 +261,42 @@ namespace Tiny_Top_Adventure
 
             if (e.KeyCode == Keys.A && x - Gap >= 0)
             {
-                if (man == L1) { man = L2; } else { man = L1; }
+                isMovingRight = false;
+                isMovingUp = false;
+                isMovingDown = false;
+                isMovingLeft = true;
+                leftMoveFrame = 0;
                 x -= Gap;
                 moved = true;
                 if (x < 0) x = pictureBox1.Width;
             }
             if (e.KeyCode == Keys.D && x + Gap + charWidth <= Main.Width)
             {
-                if (man == R1) man = R2; else man = R1;
+                isMovingLeft = false;
+                isMovingUp = false;
+                isMovingDown = false;
+                isMovingRight = true;
+                rightMoveFrame = 0;
                 x += Gap;
                 moved = true;
             }
             if (e.KeyCode == Keys.S && y + Gap + charHeight <= Main.Height)
             {
-                if (man == F1) man = F2; else man = F1;
+                isMovingRight = false;
+                isMovingLeft = false;
+                isMovingUp = false;
+                isMovingDown = true;
+                downMoveFrame = 0;
                 y += Gap;
                 moved = true;
             }
             if (e.KeyCode == Keys.W && y - Gap >= 0)
             {
-                if (man == B1) man = B2; else man = B1;
+                isMovingRight = false;
+                isMovingLeft = false;
+                isMovingDown = false;
+                isMovingUp = true;
+                upMoveFrame = 0;
                 y -= Gap;
                 moved = true;
             }
@@ -203,18 +314,19 @@ namespace Tiny_Top_Adventure
             }
         }
         private Boolean checkCollision()// is an obstacle blocking the way
-        { Boolean collision = false;
-            RectangleF manBound = new RectangleF(x, y, 30, 40);            
-                    for (int i = 0; i < 3; i++) //iterate through the obstacle array
+        {
+            Boolean collision = false;
+            RectangleF manBound = new RectangleF(x, y, 30, 40);
+            for (int i = 0; i < 3; i++) //iterate through the obstacle array
             {
                 if (manBound.IntersectsWith(obstacles[i].bounds))
                 {
                     collision = true;
-                }               
+                }
             }
-                return collision;            
+            return collision;
         }
-       private Boolean checkCoins()
+        private Boolean checkCoins()
         {
             RectangleF manBound = new RectangleF(x, y, 30, 40);
             for (int i = 0; i < coinList.Count; i++)
@@ -233,16 +345,63 @@ namespace Tiny_Top_Adventure
         {
             if (!coinReverse)
             {
-                coinFrame++; 
+                coinFrame++;
                 if (coinFrame >= coinImages.Length - 1) coinReverse = true;
             }
             else
             {
-                coinFrame--; 
+                coinFrame--;
                 if (coinFrame <= 0) coinReverse = false;
             }
 
             Main.Invalidate(); // Redraw the game screen
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D)
+            {
+                isMovingRight = false;
+            }
+            if (e.KeyCode == Keys.A)
+            {
+                isMovingLeft = false;
+            }
+            if (e.KeyCode == Keys.W)
+            {
+                isMovingUp = false;
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                isMovingDown = false;
+            }
+
+        }
+
+        private void rightMoveTimer_Tick(object sender, EventArgs e)
+        {
+            if (isMovingRight)
+            {
+                rightMoveFrame++;
+                if (rightMoveFrame >= SonicR.Length) rightMoveFrame = 0;
+            }
+            if (isMovingLeft)
+            {
+                leftMoveFrame++;
+                if (leftMoveFrame >= SonicL.Length) leftMoveFrame = 0;
+            }
+            if (isMovingUp)
+            {
+                upMoveFrame++;
+                if (upMoveFrame >= SonicU.Length) upMoveFrame = 0;
+            }
+            if (isMovingDown)
+            {
+                downMoveFrame++;
+                if (downMoveFrame >= SonicD.Length) downMoveFrame = 0;
+            }
+
+            Main.Invalidate();
         }
     }
 }

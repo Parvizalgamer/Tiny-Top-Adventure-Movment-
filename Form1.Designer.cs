@@ -34,6 +34,8 @@
             this.Cointxt = new System.Windows.Forms.Label();
             this.Coins_label = new System.Windows.Forms.Label();
             this.coinTimer = new System.Windows.Forms.Timer(this.components);
+            this.rightMoveTimer = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +85,10 @@
             this.coinTimer.Enabled = true;
             this.coinTimer.Tick += new System.EventHandler(this.coinTimer_Tick);
             // 
+            // rightMoveTimer
+            // 
+            this.rightMoveTimer.Tick += new System.EventHandler(this.rightMoveTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -98,6 +104,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.Main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -112,6 +119,8 @@
         private System.Windows.Forms.Label Cointxt;
         private System.Windows.Forms.Label Coins_label;
         private System.Windows.Forms.Timer coinTimer;
+        private System.Windows.Forms.Timer rightMoveTimer;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

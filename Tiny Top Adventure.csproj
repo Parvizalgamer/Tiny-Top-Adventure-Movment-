@@ -155,5 +155,110 @@
   <ItemGroup>
     <None Include="Resources\Coin 10.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\B1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\F1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
