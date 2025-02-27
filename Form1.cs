@@ -124,21 +124,37 @@ namespace Tiny_Top_Adventure
         // Movement Timer Tick Event (Handles Character Movement and Collision)
         private void movementTimer_Tick(object sender, EventArgs e)
         {
-            // Store previous position of the spriites each time
+            int oldX = x;
+            int oldY = y;
+            int oldRightFrame = rightMoveFrame;
+            int oldLeftFrame = leftMoveFrame;
+            int oldUpFrame = upMoveFrame;
+            int oldDownFrame = downMoveFrame;
+
             previousX = x;
             previousY = y;
 
-            // Update character position based on movement flags
-            if (isMovingRight && x + movementSpeed + charWidth <= Main.Width) { x += movementSpeed; }//"+ movementSpeed + charWidth <= Main.Width" this part checks if the chacter is at the boundary and if it is then the character cannot move
+            // Movement Logic (Collision Check)
+            if (isMovingRight && x + movementSpeed + charWidth <= Main.Width) { x += movementSpeed; }
             if (isMovingLeft && x - movementSpeed >= 0) { x -= movementSpeed; }
             if (isMovingUp && y - movementSpeed >= 0) { y -= movementSpeed; }
             if (isMovingDown && y + movementSpeed + charHeight <= Main.Height) { y += movementSpeed; }
 
-            // Check for collision 
             if (checkCollision()) { x = previousX; y = previousY; }
-            checkCoins();//always checking for coins might have to change if memory is a problem
-            //  redraw the character
-            if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown) { Main.Invalidate(); }
+            checkCoins();
+
+            // Animation Logic (Independent of Collision)
+            if (isMovingRight) { rightMoveFrame++; if (rightMoveFrame >= SonicR.Length) rightMoveFrame = 0; }
+            if (isMovingLeft) { leftMoveFrame++; if (leftMoveFrame >= SonicL.Length) leftMoveFrame = 0; }
+            if (isMovingUp) { upMoveFrame++; if (upMoveFrame >= SonicU.Length) upMoveFrame = 0; }
+            if (isMovingDown) { downMoveFrame++; if (downMoveFrame >= SonicD.Length) downMoveFrame = 0; }
+
+            // Invalidate if Position or Animation Changed
+            if (oldX != x || oldY != y || oldRightFrame != rightMoveFrame || oldLeftFrame != leftMoveFrame || oldUpFrame != upMoveFrame || oldDownFrame != downMoveFrame)
+            {
+                Main.Invalidate(new Rectangle(Math.Min(oldX, x), Math.Min(oldY, y), charWidth, charHeight));
+                Main.Invalidate(new Rectangle(Math.Max(oldX, x), Math.Max(oldY, y), charWidth, charHeight));
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
