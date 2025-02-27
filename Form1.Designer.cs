@@ -35,7 +35,6 @@
             this.Coins_label = new System.Windows.Forms.Label();
             this.coinTimer = new System.Windows.Forms.Timer(this.components);
             this.rightMoveTimer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +86,6 @@
             // 
             // rightMoveTimer
             // 
-            this.rightMoveTimer.Interval = 25;
             this.rightMoveTimer.Tick += new System.EventHandler(this.rightMoveTimer_Tick);
             // 
             // Form1
@@ -121,7 +119,7 @@
         private System.Windows.Forms.Label Coins_label;
         private System.Windows.Forms.Timer coinTimer;
         private System.Windows.Forms.Timer rightMoveTimer;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer movementTimer;
     }
 }
 

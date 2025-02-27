@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace Tiny_Top_Adventure
 
         static Image[] SonicR = new Image[]
         {
-            Tiny_Top_Adventure.Properties.Resources.R1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.R1, 
             Tiny_Top_Adventure.Properties.Resources.R2,
             Tiny_Top_Adventure.Properties.Resources.R3,
             Tiny_Top_Adventure.Properties.Resources.R4,
@@ -20,10 +21,10 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.R8,
             Tiny_Top_Adventure.Properties.Resources.R9,
             Tiny_Top_Adventure.Properties.Resources.R10
-        };
+        };// right moving sonic array
         static Image[] SonicL = new Image[]
         {
-            Tiny_Top_Adventure.Properties.Resources.L1, // Replace with your actual resource names
+            Tiny_Top_Adventure.Properties.Resources.L1, 
             Tiny_Top_Adventure.Properties.Resources.L2,
             Tiny_Top_Adventure.Properties.Resources.L3,
             Tiny_Top_Adventure.Properties.Resources.L4,
@@ -33,7 +34,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.L8,
             Tiny_Top_Adventure.Properties.Resources.L9,
             Tiny_Top_Adventure.Properties.Resources.L10
-        };
+        };// left moving sonic array
         static Image[] SonicU = new Image[]
         {
             Tiny_Top_Adventure.Properties.Resources.B1, // Replace with your actual resource names
@@ -45,7 +46,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.B7,
             Tiny_Top_Adventure.Properties.Resources.B8,
             Tiny_Top_Adventure.Properties.Resources.B9, 
-        };
+        };//to cahnge with futher 
         static Image[] SonicD = new Image[]
         {
             Tiny_Top_Adventure.Properties.Resources.F1, // Replace with your actual resource names
@@ -54,17 +55,22 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.F4,
             Tiny_Top_Adventure.Properties.Resources.F5,
             Tiny_Top_Adventure.Properties.Resources.F6,
-        };
+        };// to cahnge wuith further
+
+        // Animation Frame Indexes and Movement Flags
         int rightMoveFrame = 0;
         bool isMovingRight = false;
         int leftMoveFrame = 0;
         bool isMovingLeft = false;
-
         int upMoveFrame = 0;
         bool isMovingUp = false;
-
         int downMoveFrame = 0;
         bool isMovingDown = false;
+
+        // Character Movement Speed and Previous Position
+        private int movementSpeed = 10;// sonic speed
+        private int previousX;
+        private int previousY;
         struct obstacle//Structure of Obstacle
         {
             public Image imageName;
@@ -74,25 +80,15 @@ namespace Tiny_Top_Adventure
             public int height;
             public Rectangle bounds;
         }
-        obstacle[] obstacles = new obstacle[3]; // we have space for 3 objects in our array.
-                                                // These are fixed and don't change so an array is appropriate
+        obstacle[] obstacles = new obstacle[3]; // we have space for 3 objects in our array. These are fixed and don't change so an array is appropriate
+        static Image fence = Tiny_Top_Adventure.Properties.Resources.Fence;
+
+        // Coin Data and List
         static Image coinFront = Tiny_Top_Adventure.Properties.Resources.Coin_4;
         List<obstacle> coinList = new List<obstacle>();
         int coins;
-        int charWidth = 50;
-        int charHeight = 60;
-        static Image F1 = Tiny_Top_Adventure.Properties.Resources.walkF1;
-        static Image F2 = Tiny_Top_Adventure.Properties.Resources.walkF2;
-        static Image B1 = Tiny_Top_Adventure.Properties.Resources.walkB1;
-        static Image B2 = Tiny_Top_Adventure.Properties.Resources.walkB2;
-        static Image L1 = Tiny_Top_Adventure.Properties.Resources.walkL1;
-        static Image L2 = Tiny_Top_Adventure.Properties.Resources.walkL2;
-        //static Image R1 = Tiny_Top_Adventure.Properties.Resources.walkR1;
-        //static Image R2 = Tiny_Top_Adventure.Properties.Resources.walkR2;
-        static Image fence = Tiny_Top_Adventure.Properties.Resources.Fence;
-
         static Image[] coinImages = new Image[]
-        {
+       {
             Tiny_Top_Adventure.Properties.Resources.Coin_1,
             Tiny_Top_Adventure.Properties.Resources.Coin_2,
             Tiny_Top_Adventure.Properties.Resources.Coin_3,
@@ -106,77 +102,71 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.Coin_11,
             Tiny_Top_Adventure.Properties.Resources.Coin_12,
             Tiny_Top_Adventure.Properties.Resources.Coin_13,
-        };
+        };// coins array
         int coinFrame = 0; // Keeps track of the current coin image
-
-
-
+        
+        // Man
+        static Image F1 = Tiny_Top_Adventure.Properties.Resources.walkF1;
         Image man = F1;
         static int y = 20;
         static int x = 20;
+        int charWidth = 50;
+        int charHeight = 60;
+
 
         public Form1()
         {
             InitializeComponent();
+            movementTimer = new Timer();
+            movementTimer.Interval = 1000 / 60; // 60 updates per second
+            movementTimer.Tick += movementTimer_Tick;
+            movementTimer.Enabled = true;}
+        // Movement Timer Tick Event (Handles Character Movement and Collision)
+        private void movementTimer_Tick(object sender, EventArgs e)
+        {
+            // Store previous position of the spriites each time
+            previousX = x;
+            previousY = y;
+
+            // Update character position based on movement flags
+            if (isMovingRight && x + movementSpeed + charWidth <= Main.Width) { x += movementSpeed; }//"+ movementSpeed + charWidth <= Main.Width" this part checks if the chacter is at the boundary and if it is then the character cannot move
+            if (isMovingLeft && x - movementSpeed >= 0) { x -= movementSpeed; }
+            if (isMovingUp && y - movementSpeed >= 0) { y -= movementSpeed; }
+            if (isMovingDown && y + movementSpeed + charHeight <= Main.Height) { y += movementSpeed; }
+
+            // Check for collision 
+            if (checkCollision()) { x = previousX; y = previousY; }
+            checkCoins();//always checking for coins might have to change if memory is a problem
+            //  redraw the character
+            if (isMovingRight || isMovingLeft || isMovingUp || isMovingDown) { Main.Invalidate(); }
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            rightMoveTimer.Enabled = true;
-            rightMoveTimer.Interval = 1000 / 60;// fix aniamtion
-            obstacles[0] = new obstacle
-            {
-                imageName = fence,
-                xLoc = 500,
-                yLoc = 450,
-                width = 45,
-                height = 40,
-                bounds = new Rectangle(500, 450, 45, 40)
-            };
+        { // Initialize Obstacles
+            obstacles[0] = new obstacle { imageName = fence, xLoc = 500, yLoc = 450, width = 45, height = 40, bounds = new Rectangle(500, 450, 45, 40) };
+            obstacles[1] = new obstacle { imageName = fence, xLoc = 350, yLoc = 400, width = 45, height = 40, bounds = new Rectangle(350, 400, 45, 40) };
+            obstacles[2] = new obstacle { imageName = fence, xLoc = 580, yLoc = 300, width = 45, height = 40, bounds = new Rectangle(580, 300, 45, 40) };
 
-            obstacles[1] = new obstacle
-            {
-                imageName = fence,
-                xLoc = 350,
-                yLoc = 400,
-                width = 45,
-                height = 40,
-                bounds = new Rectangle(350, 400, 45, 40)
-            };
-
-            obstacles[2] = new obstacle
-            {
-                imageName = fence,
-                xLoc = 580,
-                yLoc = 300,
-                width = 45,
-                height = 40,
-                bounds = new Rectangle(580, 300, 45, 40)
-            };
-
+            // Initialize Coins
             coins = 0;
             int coinx = 400;
             float scaleFactor = 0.2f; // Same scale factor as in Main_Paint
 
             for (int i = 0; i < 10; i++)
             {
-                Image coinImage = coinImages[0]; // Use any coin image to get dimensions
-                int originalWidth = coinImage.Width;
-                int originalHeight = coinImage.Height;
-
-                int scaledWidth = (int)(originalWidth * scaleFactor);
-                int scaledHeight = (int)(originalHeight * scaleFactor);
-
+                Image coinImage = coinImages[0];
+                int scaledWidth = (int)(coinImage.Width * scaleFactor);
+                int scaledHeight = (int)(coinImage.Height * scaleFactor);
                 coinList.Add(new obstacle()
-                {
+                 {
                     imageName = coinFront,
                     xLoc = coinx,
                     yLoc = 400,
                     width = scaledWidth, // Use scaled width for hitbox
                     height = scaledHeight, // Use scaled height for hitbox
                     bounds = new Rectangle(coinx - scaledWidth / 2, 400 - scaledHeight / 2, scaledWidth, scaledHeight) // Center the hitbox
-                });
-                coinx = coinx + 40;
+                  });
+                coinx += 40;
             }
         }
 
@@ -260,46 +250,21 @@ namespace Tiny_Top_Adventure
             int Gap = 10;
             bool moved = false;
 
-            if (e.KeyCode == Keys.A && x - Gap >= 0)
+            if (e.KeyCode == Keys.A)
             {
-                isMovingRight = false;
-                isMovingUp = false;
-                isMovingDown = false;
                 isMovingLeft = true;
-                leftMoveFrame = 0;
-                x -= Gap;
-                moved = true;
-                if (x < 0) x = pictureBox1.Width;
             }
-            if (e.KeyCode == Keys.D && x + Gap + charWidth <= Main.Width)
+            if (e.KeyCode == Keys.D)
             {
-                isMovingLeft = false;
-                isMovingUp = false;
-                isMovingDown = false;
                 isMovingRight = true;
-                rightMoveFrame = 0;
-                x += Gap;
-                moved = true;
             }
-            if (e.KeyCode == Keys.S && y + Gap + charHeight <= Main.Height)
+            if (e.KeyCode == Keys.S)
             {
-                isMovingRight = false;
-                isMovingLeft = false;
-                isMovingUp = false;
                 isMovingDown = true;
-                downMoveFrame = 0;
-                y += Gap;
-                moved = true;
             }
-            if (e.KeyCode == Keys.W && y - Gap >= 0)
+            if (e.KeyCode == Keys.W)
             {
-                isMovingRight = false;
-                isMovingLeft = false;
-                isMovingDown = false;
                 isMovingUp = true;
-                upMoveFrame = 0;
-                y -= Gap;
-                moved = true;
             }
             if (moved)
             {
@@ -376,7 +341,6 @@ namespace Tiny_Top_Adventure
             {
                 isMovingDown = false;
             }
-
         }
 
         private void rightMoveTimer_Tick(object sender, EventArgs e)
