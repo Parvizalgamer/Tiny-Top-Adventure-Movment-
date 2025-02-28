@@ -152,7 +152,7 @@ namespace Tiny_Top_Adventure
 
 
             idleTimer = new Timer();
-            idleTimer.Interval = 1000 / 10; // Example: 15 updates per second (idle) - adjust as needed
+            idleTimer.Interval = 1000 / 8; // Example: 15 updates per second (idle) - adjust as needed
             idleTimer.Tick += idleTimer_Tick;
             idleTimer.Enabled = true;
         }
