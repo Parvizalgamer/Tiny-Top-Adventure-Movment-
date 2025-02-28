@@ -8,6 +8,7 @@ namespace Tiny_Top_Adventure
 {
     public partial class Form1 : Form
     {
+        //https://info.sonicretro.org/Sonic_the_Hedgehog_(16-bit)/Maps maps and sprites
 
         static Image[] SonicR = new Image[]
         {
