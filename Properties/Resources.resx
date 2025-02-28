@@ -208,6 +208,69 @@
   <data name="Fence" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fence.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="frame_00_delay_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_00_delay-2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_01_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_01_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_02_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_02_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_03_delay_0_16s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_03_delay-0.16s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_04_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_04_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_05_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_05_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_06_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_06_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_07_delay_0_08s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_07_delay-0.08s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_08_delay_0_24s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_08_delay-0.24s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_09_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_09_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_10_delay_0_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_10_delay-0.2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_11_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_11_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_12_delay_0_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_12_delay-0.2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_13_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_13_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_14_delay_0_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_14_delay-0.2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_15_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_15_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_16_delay_0_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_16_delay-0.2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_17_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_17_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_18_delay_0_2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_18_delay-0.2s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_19_delay_0_13s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_19_delay-0.13s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="frame_20_delay_0_83s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frame_20_delay-0.83s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="L1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\L1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

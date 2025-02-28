@@ -363,6 +363,216 @@ namespace Tiny_Top_Adventure.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap frame_00_delay_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_00_delay_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_01_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_01_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_02_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_02_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_03_delay_0_16s {
+            get {
+                object obj = ResourceManager.GetObject("frame_03_delay_0_16s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_04_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_04_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_05_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_05_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_06_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_06_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_07_delay_0_08s {
+            get {
+                object obj = ResourceManager.GetObject("frame_07_delay_0_08s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_08_delay_0_24s {
+            get {
+                object obj = ResourceManager.GetObject("frame_08_delay_0_24s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_09_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_09_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_10_delay_0_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_10_delay_0_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_11_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_11_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_12_delay_0_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_12_delay_0_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_13_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_13_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_14_delay_0_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_14_delay_0_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_15_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_15_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_16_delay_0_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_16_delay_0_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_17_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_17_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_18_delay_0_2s {
+            get {
+                object obj = ResourceManager.GetObject("frame_18_delay_0_2s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_19_delay_0_13s {
+            get {
+                object obj = ResourceManager.GetObject("frame_19_delay_0_13s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap frame_20_delay_0_83s {
+            get {
+                object obj = ResourceManager.GetObject("frame_20_delay_0_83s", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap L1 {
             get {
                 object obj = ResourceManager.GetObject("L1", resourceCulture);

@@ -260,5 +260,164 @@
   <ItemGroup>
     <None Include="Resources\L1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_14_delay-0.2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_15_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_16_delay-0.2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_17_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_18_delay-0.2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_19_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_20_delay-0.83s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_06_delay-0.08s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_07_delay-0.08s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_08_delay-0.24s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_09_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_10_delay-0.2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_11_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_12_delay-0.2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_13_delay-0.13s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_00_delay-2s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_01_delay-0.08s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_02_delay-0.08s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_03_delay-0.16s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_04_delay-0.08s.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frame_05_delay-0.08s.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

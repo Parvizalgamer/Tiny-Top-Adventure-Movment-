@@ -56,7 +56,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.F5,
             Tiny_Top_Adventure.Properties.Resources.F6,
         };// to cahnge wuith further
-
+        
         // Animation Frame Indexes and Movement Flags
         int rightMoveFrame = 0;
         bool isMovingRight = false;
@@ -66,6 +66,34 @@ namespace Tiny_Top_Adventure
         bool isMovingUp = false;
         int downMoveFrame = 0;
         bool isMovingDown = false;
+
+
+        private Timer idleTimer;
+        static Image[] SonicIdle = new Image[]
+{
+    Tiny_Top_Adventure.Properties.Resources.frame_00_delay_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_01_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_02_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_03_delay_0_16s,
+    Tiny_Top_Adventure.Properties.Resources.frame_04_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_05_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_06_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_07_delay_0_08s,
+    Tiny_Top_Adventure.Properties.Resources.frame_08_delay_0_24s,
+    Tiny_Top_Adventure.Properties.Resources.frame_09_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_10_delay_0_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_11_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_12_delay_0_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_13_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_14_delay_0_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_15_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_16_delay_0_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_17_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_18_delay_0_2s,
+    Tiny_Top_Adventure.Properties.Resources.frame_19_delay_0_13s,
+    Tiny_Top_Adventure.Properties.Resources.frame_20_delay_0_83s,
+};// IDLE animation
+        int idleFrame = 0;
 
         // Character Movement Speed and Previous Position
         private int movementSpeed = 10;// sonic speed
@@ -120,7 +148,14 @@ namespace Tiny_Top_Adventure
             movementTimer = new Timer();
             movementTimer.Interval = 1000 / 60; // 60 updates per second
             movementTimer.Tick += movementTimer_Tick;
-            movementTimer.Enabled = true;}
+            movementTimer.Enabled = true;
+
+
+            idleTimer = new Timer();
+            idleTimer.Interval = 1000 / 10; // Example: 15 updates per second (idle) - adjust as needed
+            idleTimer.Tick += idleTimer_Tick;
+            idleTimer.Enabled = true;
+        }
         // Movement Timer Tick Event (Handles Character Movement and Collision)
         private void movementTimer_Tick(object sender, EventArgs e)
         {
@@ -154,6 +189,16 @@ namespace Tiny_Top_Adventure
             {
                 Main.Invalidate(new Rectangle(Math.Min(oldX, x), Math.Min(oldY, y), charWidth, charHeight));
                 Main.Invalidate(new Rectangle(Math.Max(oldX, x), Math.Max(oldY, y), charWidth, charHeight));
+            }
+        }
+
+        private void idleTimer_Tick(object sender, EventArgs e)
+        {
+            if (!isMovingRight && !isMovingLeft && !isMovingUp && !isMovingDown)
+            {
+                idleFrame++;
+                if (idleFrame >= SonicIdle.Length) idleFrame = 0;
+                Main.Invalidate(); // Redraw only if idle animation is active
             }
         }
 
@@ -215,7 +260,6 @@ namespace Tiny_Top_Adventure
                         scaledHeight);
                 }
             }
-
             if (isMovingRight)
             {
                 e.Graphics.DrawImage(SonicR[rightMoveFrame], x, y, charWidth, charHeight);
@@ -234,8 +278,10 @@ namespace Tiny_Top_Adventure
             }
             else
             {
-                e.Graphics.DrawImage(man, x, y, charWidth, charHeight); // Draw the standing sprite
+                // Draw the idle animation when not moving
+                e.Graphics.DrawImage(SonicIdle[idleFrame], x, y, charWidth, charHeight);
             }
+
             if (coinList.Count > 0)
             {
                 float scaleFactor = 0.35f; // Adjust this value to your desired size (e.g., 0.5 for half size)
