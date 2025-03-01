@@ -313,34 +313,35 @@ namespace Tiny_Top_Adventure
             int Gap = 10;
             bool moved = false;
 
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.A)
             {
                 isMovingLeft = true;
                 moved = true;
             }
-            {
-                isMovingLeft = true;
-            }
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D)
             {
                 isMovingRight = true;
+                moved = true;
             }
-            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.S)
             {
                 isMovingDown = true;
+                moved = true;
             }
-            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.W)
             {
                 isMovingUp = true;
+                moved = true;
             }
+            
             if (moved)
             {
                 if (checkCollision())
                 {
-                    if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) x += Gap;
-                    if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) x -= Gap;
-                    if (e.KeyCode == Keys.S || e.KeyCode == Keys.Back) y -= Gap;
-                    if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) y += Gap;
+                    if (e.KeyCode == Keys.A) x += Gap;
+                    if (e.KeyCode == Keys.D) x -= Gap;
+                    if (e.KeyCode == Keys.S) y -= Gap;
+                    if (e.KeyCode == Keys.W) y += Gap;
                 }
                 checkCoins();
                 Main.Refresh();
@@ -392,48 +393,24 @@ namespace Tiny_Top_Adventure
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D  )
             {
                 isMovingRight = false;
             }
-            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.A  )
             {
                 isMovingLeft = false;
             }
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.W  )
             {
                 isMovingUp = false;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S  )
             {
                 isMovingDown = false;
             }
         }
 
-        private void rightMoveTimer_Tick(object sender, EventArgs e)
-        {
-            if (isMovingRight)
-            {
-                rightMoveFrame++;
-                if (rightMoveFrame >= SonicR.Length) rightMoveFrame = 0;
-            }
-            if (isMovingLeft)
-            {
-                leftMoveFrame++;
-                if (leftMoveFrame >= SonicL.Length) leftMoveFrame = 0;
-            }
-            if (isMovingUp)
-            {
-                upMoveFrame++;
-                if (upMoveFrame >= SonicU.Length) upMoveFrame = 0;
-            }
-            if (isMovingDown)
-            {
-                downMoveFrame++;
-                if (downMoveFrame >= SonicD.Length) downMoveFrame = 0;
-            }
-
-            Main.Invalidate();
-        }
+        
     }
 }

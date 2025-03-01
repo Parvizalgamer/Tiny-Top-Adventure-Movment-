@@ -88,10 +88,6 @@
             this.coinTimer.Enabled = true;
             this.coinTimer.Tick += new System.EventHandler(this.coinTimer_Tick);
             // 
-            // rightMoveTimer
-            // 
-            this.rightMoveTimer.Tick += new System.EventHandler(this.rightMoveTimer_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
