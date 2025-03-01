@@ -313,19 +313,23 @@ namespace Tiny_Top_Adventure
             int Gap = 10;
             bool moved = false;
 
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
+            {
+                isMovingLeft = true;
+                moved = true;
+            }
             {
                 isMovingLeft = true;
             }
-            if (e.KeyCode == Keys.D)
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 isMovingRight = true;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S || e.KeyCode == Keys.Down)
             {
                 isMovingDown = true;
             }
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up)
             {
                 isMovingUp = true;
             }
@@ -333,10 +337,10 @@ namespace Tiny_Top_Adventure
             {
                 if (checkCollision())
                 {
-                    if (e.KeyCode == Keys.A) x += Gap;
-                    if (e.KeyCode == Keys.D) x -= Gap;
-                    if (e.KeyCode == Keys.S) y -= Gap;
-                    if (e.KeyCode == Keys.W) y += Gap;
+                    if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left) x += Gap;
+                    if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right) x -= Gap;
+                    if (e.KeyCode == Keys.S || e.KeyCode == Keys.Back) y -= Gap;
+                    if (e.KeyCode == Keys.W || e.KeyCode == Keys.Up) y += Gap;
                 }
                 checkCoins();
                 Main.Refresh();
@@ -388,11 +392,11 @@ namespace Tiny_Top_Adventure
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D)
+            if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
             {
                 isMovingRight = false;
             }
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
             {
                 isMovingLeft = false;
             }
