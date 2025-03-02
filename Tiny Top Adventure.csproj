@@ -419,5 +419,8 @@
   <ItemGroup>
     <None Include="Resources\frame_05_delay-0.08s.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Game Background.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
