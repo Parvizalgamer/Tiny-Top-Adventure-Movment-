@@ -271,9 +271,6 @@
   <data name="frame_20_delay_0_83s" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\frame_20_delay-0.83s.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Game_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Game Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="L1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\L1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -303,6 +300,9 @@
   </data>
   <data name="L9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\L9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Level1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Game Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="R1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\R1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

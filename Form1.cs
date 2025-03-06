@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Tiny_Top_Adventure
@@ -12,7 +12,7 @@ namespace Tiny_Top_Adventure
 
         static Image[] SonicR = new Image[]
         {
-            Tiny_Top_Adventure.Properties.Resources.R1, 
+            Tiny_Top_Adventure.Properties.Resources.R1,
             Tiny_Top_Adventure.Properties.Resources.R2,
             Tiny_Top_Adventure.Properties.Resources.R3,
             Tiny_Top_Adventure.Properties.Resources.R4,
@@ -25,7 +25,7 @@ namespace Tiny_Top_Adventure
         };// right moving sonic array
         static Image[] SonicL = new Image[]
         {
-            Tiny_Top_Adventure.Properties.Resources.L1, 
+            Tiny_Top_Adventure.Properties.Resources.L1,
             Tiny_Top_Adventure.Properties.Resources.L2,
             Tiny_Top_Adventure.Properties.Resources.L3,
             Tiny_Top_Adventure.Properties.Resources.L4,
@@ -46,7 +46,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.B6,
             Tiny_Top_Adventure.Properties.Resources.B7,
             Tiny_Top_Adventure.Properties.Resources.B8,
-            Tiny_Top_Adventure.Properties.Resources.B9, 
+            Tiny_Top_Adventure.Properties.Resources.B9,
         };//to cahnge with futher 
         static Image[] SonicD = new Image[]
         {
@@ -57,7 +57,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.F5,
             Tiny_Top_Adventure.Properties.Resources.F6,
         };// to cahnge wuith further
-        
+
         // Animation Frame Indexes and Movement Flags
         int rightMoveFrame = 0;
         bool isMovingRight = false;
@@ -67,7 +67,13 @@ namespace Tiny_Top_Adventure
         bool isMovingUp = false;
         int downMoveFrame = 0;
         bool isMovingDown = false;
+        int idleFrame = 0;
 
+        // Gravity and Jumping
+        private int verticalVelocity = 0;
+        private int gravity = 1;
+        private bool isJumping = false;
+        private int jumpHeight = -20; // Adjusted jump height
 
         private Timer idleTimer;
         static Image[] SonicIdle = new Image[]
@@ -94,12 +100,20 @@ namespace Tiny_Top_Adventure
     Tiny_Top_Adventure.Properties.Resources.frame_19_delay_0_13s,
     Tiny_Top_Adventure.Properties.Resources.frame_20_delay_0_83s,
 };// IDLE animation
-        int idleFrame = 0;
+
 
         // Character Movement Speed and Previous Position
         private int movementSpeed = 10;// sonic speed
         private int previousX;
         private int previousY;
+
+        //Camera Control Variable
+        private int cameraX = 0;
+        private int cameraY = 0;
+        private int cameraOffsetX = 200; // Increased offset
+        private int cameraOffsetY = 150; // Increased offset
+        private float cameraDamping = 0.1f; // Adjust for smoother vertical movement
+
         struct obstacle//Structure of Obstacle
         {
             public Image imageName;
@@ -133,7 +147,7 @@ namespace Tiny_Top_Adventure
             Tiny_Top_Adventure.Properties.Resources.Coin_13,
         };// coins array
         int coinFrame = 0; // Keeps track of the current coin image
-        
+
         // Man
         static Image F1 = Tiny_Top_Adventure.Properties.Resources.walkF1;
         Image man = F1;
@@ -170,78 +184,219 @@ namespace Tiny_Top_Adventure
             previousX = x;
             previousY = y;
 
-            // Movement Logic (Collision Check)
+            // Horizontal Movement
             if (isMovingRight && x + movementSpeed + charWidth <= Main.Width) { x += movementSpeed; }
             if (isMovingLeft && x - movementSpeed >= 0) { x -= movementSpeed; }
-            if (isMovingUp && y - movementSpeed >= 0) { y -= movementSpeed; }
-            if (isMovingDown && y + movementSpeed + charHeight <= Main.Height) { y += movementSpeed; }
 
-            if (checkCollision()) { x = previousX; y = previousY; }
+            // Gravity and Jumping
+            if (isJumping)
+            {
+                y += verticalVelocity;
+                verticalVelocity += gravity; // Apply gravity while jumping/falling
+                if (isOnGround()) // Check for landing
+                {
+                    isJumping = false;
+                    verticalVelocity = 0;
+                }
+            }
+            else if (!isOnGround())
+            {
+                verticalVelocity += gravity;
+                y += verticalVelocity;
+            }
+            else
+            {
+                verticalVelocity = 0;
+            }
+
+            // Collision Detection
+            if (checkCollision())
+            {
+                x = previousX;
+                y = previousY;
+                verticalVelocity = 0;
+                isJumping = false; // Ensure isJumping is false after collision
+            }
+
             checkCoins();
 
-            // Animation Logic (Independent of Collision)
+            // Update camera X position (keep it as before)
+            cameraX = x - Main.Width / 2 + cameraOffsetX;
+
+            // Update camera Y position with damping
+            float targetCameraY = y - Main.Height / 2 + cameraOffsetY;
+            cameraY += (int)((targetCameraY - cameraY) * cameraDamping);
+
+            // Ensure camera stays within bounds
+            cameraX = Math.Max(0, Math.Min(cameraX, backgroundImage.Width - Main.Width)); // Adjust bounds if needed
+            cameraY = Math.Max(0, Math.Min(cameraY, backgroundImage.Height - Main.Height)); // Adjust bounds if needed
+
+            // Animation Logic
             if (isMovingRight) { rightMoveFrame++; if (rightMoveFrame >= SonicR.Length) rightMoveFrame = 0; }
             if (isMovingLeft) { leftMoveFrame++; if (leftMoveFrame >= SonicL.Length) leftMoveFrame = 0; }
             if (isMovingUp) { upMoveFrame++; if (upMoveFrame >= SonicU.Length) upMoveFrame = 0; }
             if (isMovingDown) { downMoveFrame++; if (downMoveFrame >= SonicD.Length) downMoveFrame = 0; }
 
-            // Invalidate if Position or Animation Changed
             if (oldX != x || oldY != y || oldRightFrame != rightMoveFrame || oldLeftFrame != leftMoveFrame || oldUpFrame != upMoveFrame || oldDownFrame != downMoveFrame)
             {
                 Main.Invalidate(new Rectangle(Math.Min(oldX, x), Math.Min(oldY, y), charWidth, charHeight));
                 Main.Invalidate(new Rectangle(Math.Max(oldX, x), Math.Max(oldY, y), charWidth, charHeight));
             }
+            // Horizontal Border Checks
+            if (x < 0)
+            {
+                x = 0;
+                isMovingLeft = false;
+            }
+            if (x + charWidth > backgroundImage.Width)
+            {
+                x = backgroundImage.Width - charWidth;
+                isMovingRight = false;
+            }
+
+            // Collision Detection
+            if (checkCollision())
+            {
+                x = previousX;
+                y = previousY;
+                verticalVelocity = 0;
+                isJumping = false;
+                isMovingRight = false;
+                isMovingLeft = false;
+                isMovingUp = false;
+                isMovingDown = false;
+            }
         }
 
         private void idleTimer_Tick(object sender, EventArgs e)
         {
-            if (!isMovingRight && !isMovingLeft && !isMovingUp && !isMovingDown)
+            if (!isMovingRight && !isMovingLeft && !isMovingUp && !isMovingDown && !isJumping)
             {
                 idleFrame++;
                 if (idleFrame >= SonicIdle.Length) idleFrame = 0;
-                Main.Invalidate(); // Redraw only if idle animation is active
+                Main.Invalidate();
             }
         }
 
+
+        private Image backgroundImage;
+        private RectangleF groundBounds; // Rectangle for the ground
         private void Form1_Load(object sender, EventArgs e)
+
         { // Initialize Obstacles
             obstacles[0] = new obstacle { imageName = fence, xLoc = 500, yLoc = 450, width = 45, height = 40, bounds = new Rectangle(500, 450, 45, 40) };
             obstacles[1] = new obstacle { imageName = fence, xLoc = 350, yLoc = 400, width = 45, height = 40, bounds = new Rectangle(350, 400, 45, 40) };
             obstacles[2] = new obstacle { imageName = fence, xLoc = 580, yLoc = 300, width = 45, height = 40, bounds = new Rectangle(580, 300, 45, 40) };
 
-            // Initialize Coins
-            coins = 0;
-            int coinx = 400;
-            float scaleFactor = 0.2f; // Same scale factor as in Main_Paint
+            backgroundImage = Properties.Resources.Level1;
 
-            for (int i = 0; i < 10; i++)
+            if (backgroundImage != null)
             {
-                Image coinImage = coinImages[0];
-                int scaledWidth = (int)(coinImage.Width * scaleFactor);
-                int scaledHeight = (int)(coinImage.Height * scaleFactor);
-                coinList.Add(new obstacle()
-                 {
-                    imageName = coinFront,
-                    xLoc = coinx,
-                    yLoc = 400,
-                    width = scaledWidth, // Use scaled width for hitbox
-                    height = scaledHeight, // Use scaled height for hitbox
-                    bounds = new Rectangle(coinx - scaledWidth / 2, 400 - scaledHeight / 2, scaledWidth, scaledHeight) // Center the hitbox
-                  });
-                coinx += 40;
+                // Define the desired size (adjust these values)
+                int desiredWidth = 5000; // Example desired width
+
+
+                // Resize the image
+                backgroundImage = ResizeImage(backgroundImage, desiredWidth);
+
+                // adjust character starting position.
+                x = backgroundImage.Width / 2;
+                y = backgroundImage.Height / 2;
+
+                // Scale Obstacle positions
+                float widthScale = (float)backgroundImage.Width / Properties.Resources.Level1.Width;
+                float heightScale = (float)backgroundImage.Height / Properties.Resources.Level1.Height;
+
+                for (int i = 0; i < obstacles.Length; i++)
+                {
+                    obstacles[i].xLoc = (int)(obstacles[i].xLoc * widthScale);
+                    obstacles[i].yLoc = (int)(obstacles[i].yLoc * heightScale);
+                    obstacles[i].bounds = new Rectangle(obstacles[i].xLoc, obstacles[i].yLoc, obstacles[i].width, obstacles[i].height);
+                }
+
+                // Scale Coin positions
+                coins = 0;
+                int coinx = 400;
+                float coinScaleFactor = 0.2f;
+
+                coinList.Clear(); // clear the old coin list.
+                for (int i = 0; i < 10; i++)
+                {
+                    Image coinImage = coinImages[0];
+                    int scaledWidth = (int)(coinImage.Width * coinScaleFactor);
+                    int scaledHeight = (int)(coinImage.Height * coinScaleFactor);
+                    coinList.Add(new obstacle()
+                    {
+                        imageName = coinFront,
+                        xLoc = (int)(coinx * widthScale), // Scale x position
+                        yLoc = (int)(400 * heightScale), // Scale y position
+                        width = scaledWidth,
+                        height = scaledHeight,
+                        bounds = new Rectangle((int)(coinx * widthScale) - scaledWidth / 2, (int)(400 * heightScale) - scaledHeight / 2, scaledWidth, scaledHeight)
+                    });
+                    coinx += 40;
+                }
+                groundBounds = new RectangleF(0, backgroundImage.Height - 10, backgroundImage.Width, 10); // Adjust the height as needed
             }
         }
 
+
+
+        private Image ResizeImage(Image image, int width) // Only take width as input
+        {
+            // Calculate new height based on original aspect ratio
+            int originalWidth = image.Width;
+            int originalHeight = image.Height;
+            float aspectRatio = (float)originalWidth / originalHeight;
+
+            int newHeight = (int)(width / aspectRatio); // Calculate the new height
+
+            var destRect = new Rectangle(0, 0, width, newHeight);
+            var destImage = new Bitmap(width, newHeight);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new System.Drawing.Imaging.ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
         private void Main_Paint(object sender, PaintEventArgs e)
         {
-            //e.Graphics.DrawImage(man, x, y, charWidth, charHeight);// charWidth and charHeight  are the charcter size
+            e.Graphics.DrawImage(backgroundImage, -cameraX, -cameraY);
+
+            // Draw obstacles
             for (int i = 0; i < 3; i++)
             {
-                e.Graphics.DrawImage(obstacles[i].imageName, obstacles[i].xLoc, obstacles[i].yLoc, obstacles[i].width, obstacles[i].height);
+                e.Graphics.DrawImage(obstacles[i].imageName,
+                    obstacles[i].xLoc - cameraX, // Apply camera offset
+                    obstacles[i].yLoc - cameraY, // Apply camera offset
+                    obstacles[i].width, obstacles[i].height);
             }
+
+            // Draw character
+            if (isMovingRight) { e.Graphics.DrawImage(SonicR[rightMoveFrame], x - cameraX, y - cameraY, charWidth, charHeight); }
+            else if (isMovingLeft) { e.Graphics.DrawImage(SonicL[leftMoveFrame], x - cameraX, y - cameraY, charWidth, charHeight); }
+            else if (isMovingUp) { e.Graphics.DrawImage(SonicU[upMoveFrame], x - cameraX, y - cameraY, charWidth, charHeight); }
+            else if (isMovingDown) { e.Graphics.DrawImage(SonicD[downMoveFrame], x - cameraX, y - cameraY, charWidth, charHeight); }
+            else { e.Graphics.DrawImage(SonicIdle[idleFrame], x - cameraX, y - cameraY, charWidth, charHeight); }
+
+            // Draw coins
             if (coinList.Count > 0)
             {
-                float scaleFactor = 0.35f; // Adjust this value to your desired size (e.g., 0.5 for half size)
+                float scaleFactor = 0.35f;
 
                 foreach (var coin in coinList)
                 {
@@ -249,63 +404,15 @@ namespace Tiny_Top_Adventure
                     int originalWidth = currentCoinImage.Width;
                     int originalHeight = currentCoinImage.Height;
 
-                    // Calculate scaled dimensions
                     int scaledWidth = (int)(originalWidth * scaleFactor);
                     int scaledHeight = (int)(originalHeight * scaleFactor);
 
-                    // Draw the coin centered using scaled dimensions
                     e.Graphics.DrawImage(currentCoinImage,
-                        coin.xLoc - scaledWidth / 2,
-                        coin.yLoc - scaledHeight / 2,
-                        scaledWidth,
-                        scaledHeight);
+                        coin.xLoc - scaledWidth / 2 - cameraX, // Apply camera offset
+                        coin.yLoc - scaledHeight / 2 - cameraY, // Apply camera offset
+                        scaledWidth, scaledHeight);
                 }
             }
-            if (isMovingRight)
-            {
-                e.Graphics.DrawImage(SonicR[rightMoveFrame], x, y, charWidth, charHeight);
-            }
-            else if (isMovingLeft)
-            {
-                e.Graphics.DrawImage(SonicL[leftMoveFrame], x, y, charWidth, charHeight);
-            }
-            else if (isMovingUp)
-            {
-                e.Graphics.DrawImage(SonicU[upMoveFrame], x, y, charWidth, charHeight);
-            }
-            else if (isMovingDown)
-            {
-                e.Graphics.DrawImage(SonicD[downMoveFrame], x, y, charWidth, charHeight);
-            }
-            else
-            {
-                // Draw the idle animation when not moving
-                e.Graphics.DrawImage(SonicIdle[idleFrame], x, y, charWidth, charHeight);
-            }
-
-            if (coinList.Count > 0)
-            {
-                float scaleFactor = 0.35f; // Adjust this value to your desired size (e.g., 0.5 for half size)
-
-                foreach (var coin in coinList)
-                {
-                    Image currentCoinImage = coinImages[coinFrame];
-                    int originalWidth = currentCoinImage.Width;
-                    int originalHeight = currentCoinImage.Height;
-
-                    // Calculate scaled dimensions
-                    int scaledWidth = (int)(originalWidth * scaleFactor);
-                    int scaledHeight = (int)(originalHeight * scaleFactor);
-
-                    // Draw the coin centered using scaled dimensions
-                    e.Graphics.DrawImage(currentCoinImage,
-                        coin.xLoc - scaledWidth / 2,
-                        coin.yLoc - scaledHeight / 2,
-                        scaledWidth,
-                        scaledHeight);
-                }
-            }
-
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)//movement of the character
@@ -313,15 +420,12 @@ namespace Tiny_Top_Adventure
             int Gap = 10;
             bool moved = false;
 
-            if (e.KeyCode == Keys.A)
+            if (e.KeyCode == Keys.A) { isMovingLeft = true; }
+            if (e.KeyCode == Keys.D) { isMovingRight = true; }
+            if (e.KeyCode == Keys.Space && isOnGround() && !isJumping)
             {
-                isMovingLeft = true;
-                moved = true;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                isMovingRight = true;
-                moved = true;
+                verticalVelocity = jumpHeight;
+                isJumping = true;
             }
             if (e.KeyCode == Keys.S)
             {
@@ -333,24 +437,25 @@ namespace Tiny_Top_Adventure
                 isMovingUp = true;
                 moved = true;
             }
-            
+
             if (moved)
             {
                 if (checkCollision())
                 {
-                    if (e.KeyCode == Keys.A) x += Gap;
-                    if (e.KeyCode == Keys.D) x -= Gap;
-                    if (e.KeyCode == Keys.S) y -= Gap;
-                    if (e.KeyCode == Keys.W) y += Gap;
+                    //if (e.KeyCode == Keys.A) x += Gap;
+                    //if (e.KeyCode == Keys.D) x -= Gap;
+                    //if (e.KeyCode == Keys.S) y -= Gap;
+                   // if (e.KeyCode == Keys.W) y += Gap;
                 }
                 checkCoins();
                 Main.Refresh();
             }
         }
+
         private Boolean checkCollision()// is an obstacle blocking the way
         {
             Boolean collision = false;
-            RectangleF manBound = new RectangleF(x, y, 30, 40);
+            RectangleF manBound = new RectangleF(x, y, charWidth, charHeight); 
             for (int i = 0; i < 3; i++) //iterate through the obstacle array
             {
                 if (manBound.IntersectsWith(obstacles[i].bounds))
@@ -362,7 +467,7 @@ namespace Tiny_Top_Adventure
         }
         private Boolean checkCoins()
         {
-            RectangleF manBound = new RectangleF(x, y, 30, 40);
+            RectangleF manBound = new RectangleF(x, y, charWidth, charHeight);
             for (int i = 0; i < coinList.Count; i++)
             {
                 if (manBound.IntersectsWith(coinList[i].bounds))
@@ -393,24 +498,40 @@ namespace Tiny_Top_Adventure
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D  )
+            if (e.KeyCode == Keys.D)
             {
                 isMovingRight = false;
             }
-            if (e.KeyCode == Keys.A  )
+            if (e.KeyCode == Keys.A)
             {
                 isMovingLeft = false;
             }
-            if (e.KeyCode == Keys.W  )
+            if (e.KeyCode == Keys.W)
             {
                 isMovingUp = false;
             }
-            if (e.KeyCode == Keys.S  )
+            if (e.KeyCode == Keys.S)
             {
                 isMovingDown = false;
             }
         }
 
-        
+        private bool isOnGround()
+        {
+            RectangleF manBound = new RectangleF(x, y + 1, charWidth, charHeight);
+            if (manBound.IntersectsWith(groundBounds))
+            {
+                return true; // Keep only one return here
+            }
+            for (int i = 0; i < obstacles.Length; i++)
+            {
+                if (manBound.IntersectsWith(obstacles[i].bounds))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
