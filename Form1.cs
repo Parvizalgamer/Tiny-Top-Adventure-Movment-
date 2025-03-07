@@ -73,7 +73,7 @@ namespace Tiny_Top_Adventure
         private int verticalVelocity = 0;
         private int gravity = 1;
         private bool isJumping = false;
-        private int jumpHeight = -20; // Adjusted jump height
+        private int jumpHeight = -33; // Adjusted jump height
 
         private Timer idleTimer;
         static Image[] SonicIdle = new Image[]
@@ -185,7 +185,7 @@ namespace Tiny_Top_Adventure
             previousY = y;
 
             // Horizontal Movement
-            if (isMovingRight && x + movementSpeed + charWidth <= Main.Width) { x += movementSpeed; }
+            if (isMovingRight && x + movementSpeed + charWidth <= backgroundImage.Width) { x += movementSpeed; }
             if (isMovingLeft && x - movementSpeed >= 0) { x -= movementSpeed; }
 
             // Gravity and Jumping
@@ -210,12 +210,18 @@ namespace Tiny_Top_Adventure
             }
 
             // Collision Detection
-            if (checkCollision())
+            foreach (var obstacle in obstacles)
             {
-                x = previousX;
-                y = previousY;
-                verticalVelocity = 0;
-                isJumping = false; // Ensure isJumping is false after collision
+                if (Math.Abs(x - obstacle.xLoc) < charWidth * 2 && Math.Abs(y - obstacle.yLoc) < charHeight * 2)
+                {
+                    if (obstacle.bounds.IntersectsWith(new Rectangle(x, y, charWidth, charHeight)))
+                    {
+                        x = previousX;
+                        y = previousY;
+                        verticalVelocity = 0;
+                        isJumping = false;
+                    }
+                }
             }
 
             checkCoins();
@@ -238,17 +244,14 @@ namespace Tiny_Top_Adventure
             if (isMovingDown) { downMoveFrame++; if (downMoveFrame >= SonicD.Length) downMoveFrame = 0; }
 
             if (oldX != x || oldY != y || oldRightFrame != rightMoveFrame || oldLeftFrame != leftMoveFrame || oldUpFrame != upMoveFrame || oldDownFrame != downMoveFrame)
-            {
-                Main.Invalidate(new Rectangle(Math.Min(oldX, x), Math.Min(oldY, y), charWidth, charHeight));
-                Main.Invalidate(new Rectangle(Math.Max(oldX, x), Math.Max(oldY, y), charWidth, charHeight));
-            }
+            { Main.Invalidate(); }
             // Horizontal Border Checks
-            if (x < 0)
+            if (x <= 0 && isMovingLeft)
             {
                 x = 0;
                 isMovingLeft = false;
             }
-            if (x + charWidth > backgroundImage.Width)
+            if (x + charWidth >= backgroundImage.Width && isMovingRight)
             {
                 x = backgroundImage.Width - charWidth;
                 isMovingRight = false;
@@ -445,7 +448,7 @@ namespace Tiny_Top_Adventure
                     //if (e.KeyCode == Keys.A) x += Gap;
                     //if (e.KeyCode == Keys.D) x -= Gap;
                     //if (e.KeyCode == Keys.S) y -= Gap;
-                   // if (e.KeyCode == Keys.W) y += Gap;
+                    // if (e.KeyCode == Keys.W) y += Gap;
                 }
                 checkCoins();
                 Main.Refresh();
@@ -455,7 +458,7 @@ namespace Tiny_Top_Adventure
         private Boolean checkCollision()// is an obstacle blocking the way
         {
             Boolean collision = false;
-            RectangleF manBound = new RectangleF(x, y, charWidth, charHeight); 
+            RectangleF manBound = new RectangleF(x, y, charWidth, charHeight);
             for (int i = 0; i < 3; i++) //iterate through the obstacle array
             {
                 if (manBound.IntersectsWith(obstacles[i].bounds))
