@@ -73,7 +73,7 @@ namespace Tiny_Top_Adventure
         private int verticalVelocity = 0;
         private int gravity = 1;
         private bool isJumping = false;
-        private int jumpHeight = -33; // Adjusted jump height
+        private int jumpHeight = -10; // Adjusted jump height
 
         private Timer idleTimer;
         static Image[] SonicIdle = new Image[]
